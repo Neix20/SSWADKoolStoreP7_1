@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import formmodels.LogInModel;
-import service.UserService;
 import service.UserServiceInterface;
 
 /**
