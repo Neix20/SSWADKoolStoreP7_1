@@ -33,6 +33,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6 col-sm-6">
+
 					<%
 						if (!username.equals("")) {
 					%>
@@ -41,13 +42,22 @@
 							Welcome back,
 							<%=username%>!
 						</div>
+						<%
+							if (username.equals("admin")) {
+						%>
+						<a href="admin">System Managing</a>
+						<%
+							}
+						%>
 						<a href="profile">Profile</a> <a href="logout">Logout</a>
 					</div>
+
+
 					<%
 						} else {
 					%>
 					<div class="top-header-left">
-						<a href="signup.jsp">Sign Up</a> <a href="login.jsp">Log In</a>
+						<a href="signup">Sign Up</a> <a href="login">Log In</a>
 					</div>
 					<%
 						}

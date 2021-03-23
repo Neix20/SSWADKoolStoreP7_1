@@ -11,34 +11,54 @@
 					</div>
 					<div id="owl-demo" class="owl-carousel">
 						<div class="item">
-							<a href="#"><img src="${ pageContext.request.contextPath }images/tm-170x80-1.jpg" alt=""></a>
+							<a href="#"><img
+								src="${ pageContext.request.contextPath }/images/tm-170x80-1.jpg"
+								alt=""></a>
 						</div>
 						<div class="item">
-							<a href="#"><img src="${ pageContext.request.contextPath }images/tm-170x80-2.jpg" alt=""></a>
+							<a href="#"><img
+								src="${ pageContext.request.contextPath }/images/tm-170x80-2.jpg"
+								alt=""></a>
 						</div>
 						<div class="item">
-							<a href="#"><img src="${ pageContext.request.contextPath }images/tm-170x80-1.jpg" alt=""></a>
+							<a href="#"><img
+								src="${ pageContext.request.contextPath }/images/tm-170x80-1.jpg"
+								alt=""></a>
 						</div>
 						<div class="item">
-							<a href="#"><img src="${ pageContext.request.contextPath }images/tm-170x80-2.jpg" alt=""></a>
+							<a href="#"><img
+								src="${ pageContext.request.contextPath }/images/tm-170x80-2.jpg"
+								alt=""></a>
 						</div>
 						<div class="item">
-							<a href="#"><img src="${ pageContext.request.contextPath }images/tm-170x80-1.jpg" alt=""></a>
+							<a href="#"><img
+								src="${ pageContext.request.contextPath }/images/tm-170x80-1.jpg"
+								alt=""></a>
 						</div>
 						<div class="item">
-							<a href="#"><img src="${ pageContext.request.contextPath }images/tm-170x80-2.jpg" alt=""></a>
+							<a href="#"><img
+								src="${ pageContext.request.contextPath }/images/tm-170x80-2.jpg"
+								alt=""></a>
 						</div>
 						<div class="item">
-							<a href="#"><img src="${ pageContext.request.contextPath }images/tm-170x80-1.jpg" alt=""></a>
+							<a href="#"><img
+								src="${ pageContext.request.contextPath }/images/tm-170x80-1.jpg"
+								alt=""></a>
 						</div>
 						<div class="item">
-							<a href="#"><img src="${ pageContext.request.contextPath }images/tm-170x80-2.jpg" alt=""></a>
+							<a href="#"><img
+								src="${ pageContext.request.contextPath }/images/tm-170x80-2.jpg"
+								alt=""></a>
 						</div>
 						<div class="item">
-							<a href="#"><img src="${ pageContext.request.contextPath }images/tm-170x80-1.jpg" alt=""></a>
+							<a href="#"><img
+								src="${ pageContext.request.contextPath }/images/tm-170x80-1.jpg"
+								alt=""></a>
 						</div>
 						<div class="item">
-							<a href="#"><img src="images/tm-170x80-2.jpg" alt=""></a>
+							<a href="#"><img
+								src="${ pageContext.request.contextPath }/images/tm-170x80-2.jpg"
+								alt=""></a>
 						</div>
 					</div>
 					<!-- /#owl-demo -->
@@ -73,9 +93,9 @@
 						Kool Store is free responsive eCommerce template provided by
 						templatemo website. You can use this layout for any website. <br>
 						<br>Tempore cum mollitia eveniet laboriosam corporis voluptas
-						earum voluptate. Lorem ipsum dolor sit amet. <br>
-						<br>Credit goes to <a rel="nofollow"
-							href="http://unsplash.com">Unsplash</a> for all images.
+						earum voluptate. Lorem ipsum dolor sit amet. <br> <br>Credit
+						goes to <a rel="nofollow" href="http://unsplash.com">Unsplash</a>
+						for all images.
 					</div>
 					<!-- /.footer-widget -->
 				</div>
