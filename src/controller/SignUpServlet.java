@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import formmodels.SignUpModel;
-import service.UserService;
+import service.UserServiceInterface;
 
 /**
  * Servlet implementation class SignUpServlet
@@ -22,7 +22,7 @@ public class SignUpServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@Inject
-	private UserService userBean;
+	private UserServiceInterface userBean;
        
     /**
      * @see HttpServlet#HttpServlet()

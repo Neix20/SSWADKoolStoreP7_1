@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import formmodels.LogInModel;
 import service.UserService;
+import service.UserServiceInterface;
 
 /**
  * Servlet implementation class LogInServlet
@@ -22,7 +23,7 @@ public class LogInServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private UserService userBean;
+	private UserServiceInterface userBean;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -42,7 +43,7 @@ public class LogInServlet extends HttpServlet {
 		try {
 			for(Cookie cookie: cookies) {
 				if(cookie.getName().equals("username")) {
-					response.sendRedirect(request.getContextPath() + "/Profile");
+					response.sendRedirect(request.getContextPath() + "/profile");
 				}
 			}
 		} catch(NullPointerException ex) {

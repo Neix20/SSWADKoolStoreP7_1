@@ -44,7 +44,7 @@ http://www.templatemo.com/preview/templatemo_428_kool_store
 <link rel="stylesheet" href="${ pageContext.request.contextPath }/css/templatemo-misc.css">
 <link rel="stylesheet" href="${ pageContext.request.contextPath }/css/templatemo-style.css">
 
-<script src="js/vendor/modernizr-2.6.2.min.js"></script>
+<script src="${ pageContext.request.contextPath }js/vendor/modernizr-2.6.2.min.js"></script>
 
 </head>
 <body>
