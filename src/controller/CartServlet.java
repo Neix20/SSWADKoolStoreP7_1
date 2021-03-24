@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,6 +18,8 @@ import javax.swing.JOptionPane;
 import domain.Cart;
 import domain.Product;
 import service.ProductServiceInterface;
+import session.CartBean;
+import utility.CartItem;
 
 /**
  * Servlet implementation class CartServlet
@@ -27,6 +30,10 @@ public class CartServlet extends HttpServlet {
 
 	@Inject
 	private ProductServiceInterface productbean;
+	
+	@EJB
+	private CartBean cart;
+	
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -91,21 +98,33 @@ public class CartServlet extends HttpServlet {
 
 		if (productId != null && quantity > 0) {
 
-			HashMap<String, Integer> cart = (HashMap<String, Integer>) session.getAttribute("cart");
-
-			if (cart == null) {
-				cart = new HashMap<String, Integer>();
-			}
-
-			if (cart.containsKey(productId)) {
-				int itemquantity = cart.get(productId);
-				cart.put(productId, quantity + itemquantity);
+//			HashMap<String, Integer> cart = (HashMap<String, Integer>) session.getAttribute("cart");
+//
+//			if (cart == null) {
+//				cart = new HashMap<String, Integer>();
+//			}
+			
+//			if (cart.containsKey(productId)) {
+//				int itemquantity = cart.get(productId);
+//				cart.put(productId, quantity + itemquantity);
+//			} else {
+//				cart.put(productId, quantity);
+//			}
+//			
+//			session.setAttribute("cart", cart);
+//			displayCart(request, response);
+			String index = cart.findIndexByProductCode(productId);
+			
+			if(index.equals("Not Found")) {
+				cart.addProduct(productbean.findProduct(productId), quantity);
 			} else {
-				cart.put(productId, quantity);
+				int i = Integer.valueOf(index);
+				cart.getCartItems().get(i).setQuantity(cart.getCartItems().get(i).getQuantity() + quantity);
 			}
 
-			session.setAttribute("cart", cart);
-			displayCart(request, response);
+			response.sendRedirect(request.getContextPath() + "/Cart");
+
+			
 		}
 	}
 

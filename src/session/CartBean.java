@@ -51,5 +51,15 @@ public class CartBean {
 	public int getCartCount() {
 		return cartItems.size();
 	}
+	
+	
+	public String findIndexByProductCode(String productCode) {
+		for(int i = 0; i < cartItems.size(); i++) {
+			if(cartItems.get(i).getProduct().getProductcode().equals(productCode)) {
+				return String.valueOf(i);
+			}
+		}
+		return "Not Found";
+	}
 
 }
