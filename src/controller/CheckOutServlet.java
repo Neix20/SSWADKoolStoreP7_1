@@ -75,30 +75,6 @@ public class CheckOutServlet extends HttpServlet {
 			RequestDispatcher req = request.getRequestDispatcher("user/checkout.jsp");
 			req.forward(request, response);
 			
-			
-//			if (cart == null) {
-//				// error
-//			} else {
-//				//String total = request.getParameter("total");
-//				List<CartOld> items = new ArrayList<CartOld>();
-//				
-//				for (String productId: cart.keySet()) {
-//					CartOld item = new CartOld();
-//					Product product = productbean.findProduct(productId);
-//					item.setProduct(product);
-//					item.setQuantity(cart.get(productId));
-//					items.add(item);
-//				}
-//
-//				User user = userbean.getSingleUser(username);
-//				Customer customer = user.getCustomer();
-//				
-//				request.setAttribute("customer", customer);
-//				request.setAttribute("items", items);
-//				//request.setAttribute("total", total);
-//			}
-//			RequestDispatcher req = request.getRequestDispatcher("user/checkout.jsp");
-//			req.forward(request, response);
 		}
 		
 		
@@ -108,7 +84,7 @@ public class CheckOutServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// TODO Save the information to the database and redirect to the order successful page
 		
 	}
 
