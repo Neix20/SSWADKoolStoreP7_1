@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import domain.Cart;
 import domain.Customer;
 import domain.Product;
 import domain.User;
@@ -70,6 +69,7 @@ public class CheckOutServlet extends HttpServlet {
 		} else {
 			
 			request.getSession().setAttribute("cart", cart.getCartItems());
+			request.getSession().setAttribute("total", cart.getSubTotal());
 			request.getSession().setAttribute("customer", userbean.getSingleUser(username));
 			
 			RequestDispatcher req = request.getRequestDispatcher("user/checkout.jsp");

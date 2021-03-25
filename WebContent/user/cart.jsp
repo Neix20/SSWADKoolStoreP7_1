@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="domain.Product"%>
-<%@ page import="domain.Cart"%>
+<%@ page import="utility.CartItem"%>
 <%@ page import="java.util.*"%>
 <%@ page import="javax.servlet.http.HttpSession"%>
 
@@ -10,10 +10,19 @@
 <head>
 <meta charset="utf-8">
 <title>Shopping Cart</title>
-<link rel="stylesheet" href="css/cart.css">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+	integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+	crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+		crossorigin="anonymous"></script>
 
-<!--  jQuery -->
-<script src="js/jquery-1.8.3.min.js"></script>
+
 <script>
 	var check = false;
 
@@ -58,6 +67,20 @@
 </script>
 </head>
 <body>
+
+	<%
+		ArrayList<CartItem> cartItems = null;
+		double total = 0.0;
+		
+		try{
+			cartItems = (ArrayList<CartItem>) request.getAttribute("cart");
+			total = (double) request.getAttribute("total");
+		} catch(NullPointerException ex){
+			cartItems = new ArrayList<CartItem>();
+		}
+		int cartCount = cartItems.size();
+	%>
+
 	<header id="site-header">
 		<div class="container">
 			<h1>
@@ -66,18 +89,46 @@
 			</h1>
 		</div>
 	</header>
-	<%
-		List<Cart> items = (List<Cart>) request.getAttribute("items");
-		Double total = 0.0;
+	
+	<main class="container">
+		<div class="h1">Cart (<%= cartCount %>)</div>
 		
-		for(Cart item: items) {
+		<% if (cartCount == 0) { %>
+			<div class="row text-center">
+				<span><strong>Your cart is empty!</strong></span>
+			</div>
+		<% } else { %>
+			<%
+				for(CartItem cartItem: cartItems){
+					Product product = cartItem.getProduct();
+			%>
+				<div class="row mb-3">
+					
+				</div>
+			<%
+				}
+			%>
+		<% } %>
+		
+	</main>
+	
+	
+		
+		
+		
+		
+		
+		
+		<%
+		/*
+		for(CartItem item: cartItems) {
 			Product product = item.getProduct();
 			out.println("<div class=\"container\">");
 			out.println("<section id=\"cart\">");
 			out.println("<article class=\"product\">");
 			out.println("<header>");
 			out.println("<a href=\"Cart?action=removefromCart&productId=" + product.getProductcode() + "\" class=\"remove\">");
-			out.println("<img src=\"" + product.getImagePath() + "\" alt=\"\">");
+			out.println("<img src=\"" + "\" alt=\"\">");
 			out.println("<h3>Remove product</h3>");
 			out.println("</a>");
 			out.println("</header>");
@@ -119,6 +170,7 @@
 		out.println("</div>");
 		out.println("</div>");
 		out.println("</footer>");
+		*/
 	%>
 	
 </body>
