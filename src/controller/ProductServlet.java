@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
@@ -17,6 +18,7 @@ import domain.Customer;
 import domain.Product;
 import service.CustomerService;
 import service.ProductServiceInterface;
+import session.CartBean;
 
 /**
  * Servlet implementation class ProductServlet
@@ -28,8 +30,13 @@ public class ProductServlet extends HttpServlet {
 	@Inject
 	private CustomerService cs;
 	
+	@EJB
+	private CartBean cart;
+	
 	@Inject
 	private ProductServiceInterface productbean;
+	
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -44,20 +51,27 @@ public class ProductServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		String productcode = request.getParameter("productCode");
-		String category;
+
+		String productcode = null;
+		
 		try {
-			Product product = productbean.findProduct(productcode);
-			category = product.getProductlineBean().getProductline();
-			List<Product> productlist = productbean.getAllProductByCategoryWithExclusion(category, product.getProductcode());
-			request.setAttribute("product", product);
-			request.setAttribute("productlist", productlist);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("product-detail.jsp");
-			dispatcher.forward(request, response);
+			 productcode = request.getParameter("productCode");
+			 String category;
+				try {
+					Product product = productbean.findProduct(productcode);
+					category = product.getProductlineBean().getProductline();
+					List<Product> productlist = productbean.getAllProductByCategoryWithExclusion(category, product.getProductcode());
+					request.setAttribute("product", product);
+					request.setAttribute("productlist", productlist);
+					RequestDispatcher dispatcher = request.getRequestDispatcher("product-detail.jsp");
+					dispatcher.forward(request, response);
+				}
+				catch(EJBException e) {}
+		} catch (Exception ex) {
+			response.sendRedirect(request.getContextPath() + "/ProductList");
 		}
-		catch(EJBException e) {}
+		
+		
 		
 	}
 
@@ -65,8 +79,24 @@ public class ProductServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		String productCode = request.getParameter("productCode");
+		int quantity = Integer.valueOf(request.getParameter("quantity"));
+		
+		// TODO check present of the productcode in the table
+		
+		String index = cart.findIndexByProductCode(productCode);
+		
+		if(index.equals("Not Found")) {
+			cart.addProduct(productbean.findProduct(productCode), quantity);
+		} else {
+			int i = Integer.valueOf(index);
+			cart.getCartItems().get(i).setQuantity(cart.getCartItems().get(i).getQuantity() + quantity);
+		}
+
+		request.getSession().setAttribute("message", "Add to cart successfully!");
+		response.sendRedirect(request.getContextPath() + "/Product");
+		
 	}
 
 }
