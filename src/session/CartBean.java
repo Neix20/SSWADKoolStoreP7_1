@@ -25,9 +25,9 @@ public class CartBean {
 		cartItems.add(ci);
 	}
 	
-	public void removeProduct(String productName) {
+	public void removeProduct(String productCode) {
 		for(int i = 0; i < cartItems.size(); i++) {
-			if(cartItems.get(i).getProduct().getProductname().equals(productName)) {
+			if(cartItems.get(i).getProduct().getProductcode().equals(productCode)) {
 				cartItems.remove(i);
 				break;
 			}
@@ -58,6 +58,14 @@ public class CartBean {
 			}
 		}
 		return "Not Found";
+	}
+	
+	public void modifyQuantity(String productCode, int quantityToModify) {
+		String index = findIndexByProductCode(productCode);
+		
+		if(!index.equals("Not Found")) {
+			cartItems.get(Integer.valueOf(index)).setQuantity(cartItems.get(Integer.valueOf(index)).getQuantity() + quantityToModify);
+		}
 	}
 
 }

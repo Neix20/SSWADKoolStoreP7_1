@@ -53,8 +53,36 @@ public class CartServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		String action = (String) request.getAttribute("action");
+		String productCode = "";
+		
+		switch (action) {
+		case "resetCart":
+			cart.resetCart();
+			break;
+		case "increaseQuantity":
+			productCode = (String) request.getAttribute("productCode");
+			cart.modifyQuantity(productCode, 1);
+			break;
+		case "decreaseQuantity":
+			productCode = (String) request.getAttribute("productCode");
+			cart.modifyQuantity(productCode, -1);
+			break;
+		case "removeProduct":
+			productCode = (String) request.getAttribute("productCode");
+			cart.removeProduct(productCode);
+			break;
+		default:
+				
+		}
+		
+		request.getSession().setAttribute("cart", cart.getCartItems());
+		request.getSession().setAttribute("total", cart.getSubTotal());
+		
+		RequestDispatcher req = request.getRequestDispatcher("user/cart.jsp");
+		req.forward(request, response);
+		
 	}
 
 	
