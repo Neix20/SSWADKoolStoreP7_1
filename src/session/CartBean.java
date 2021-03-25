@@ -43,9 +43,7 @@ public class CartBean {
 	}
 	
 	public void resetCart() {
-		for(int i = 0; i < cartItems.size(); i++) {
-			this.cartItems.remove(i);
-		}
+		this.cartItems.clear();
 	}
 	
 	public int getCartCount() {
