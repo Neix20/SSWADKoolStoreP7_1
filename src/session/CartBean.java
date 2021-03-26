@@ -2,12 +2,9 @@ package session;
 
 import java.util.ArrayList;
 
-import javax.ejb.Stateful;
-
 import domain.Product;
 import utility.CartItem;
 
-@Stateful
 public class CartBean {
 	
 	private ArrayList<CartItem> cartItems;
@@ -74,3 +71,4 @@ public class CartBean {
 	}
 
 }
+

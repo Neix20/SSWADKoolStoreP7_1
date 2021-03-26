@@ -2,13 +2,13 @@ package controller;
 
 import java.io.IOException;
 
-import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import session.CartBean;
 
@@ -19,9 +19,6 @@ import session.CartBean;
 @WebServlet("/cart")
 public class CartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	@EJB
-	private CartBean cart;
 	
 
 	/**
@@ -39,7 +36,11 @@ public class CartServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		request.getSession().setAttribute("cart", cart.getCartItems());
+		HttpSession session = request.getSession();
+		CartBean cart = (CartBean) session.getAttribute("cart");
+		if(cart == null) cart = new CartBean();
+		
+		request.getSession().setAttribute("cart", cart);
 		request.getSession().setAttribute("total", cart.getSubTotal());
 		
 		RequestDispatcher req = request.getRequestDispatcher("views/user/order/cart.jsp");
@@ -56,6 +57,10 @@ public class CartServlet extends HttpServlet {
 		
 		String action = (String) request.getAttribute("action");
 		String productCode = "";
+		
+		HttpSession session = request.getSession();
+		CartBean cart = (CartBean) session.getAttribute("cart");
+		if(cart == null) cart = new CartBean();
 		
 		switch (action) {
 		case "resetCart":
@@ -77,8 +82,11 @@ public class CartServlet extends HttpServlet {
 				
 		}
 		
-		request.getSession().setAttribute("cart", cart.getCartItems());
+		session.setAttribute("cart", cart);
+		
+		request.getSession().setAttribute("cart", cart);
 		request.getSession().setAttribute("total", cart.getSubTotal());
+		
 		
 		RequestDispatcher req = request.getRequestDispatcher("views/user/order/cart.jsp");
 		req.forward(request, response);

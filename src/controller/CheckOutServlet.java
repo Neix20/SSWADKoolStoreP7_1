@@ -1,30 +1,21 @@
 package controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
-import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import domain.Customer;
-import domain.Product;
-import domain.User;
 import service.OrderDetailServiceInterface;
 import service.OrderServiceInterface;
 import service.ProductServiceInterface;
 import service.UserServiceInterface;
 import session.CartBean;
-import utility.CartItem;
 import utility.QuickGet;
 
 /**
@@ -46,9 +37,6 @@ public class CheckOutServlet extends HttpServlet {
 	@Inject
 	private UserServiceInterface userbean;
 	
-	@EJB
-	private CartBean cart;
-	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -67,8 +55,11 @@ public class CheckOutServlet extends HttpServlet {
 		if(username.equals("")) { // Require login before check out
 			response.sendRedirect(request.getContextPath() + "/login");
 		} else {
+			HttpSession session = request.getSession();
+			CartBean cart = (CartBean) session.getAttribute("cart");
+			if(cart == null) cart = new CartBean();
 			
-			request.getSession().setAttribute("cart", cart.getCartItems());
+			request.getSession().setAttribute("cart", cart);
 			request.getSession().setAttribute("total", cart.getSubTotal());
 			request.getSession().setAttribute("customer", userbean.getSingleUser(username));
 			

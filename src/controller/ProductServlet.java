@@ -1,10 +1,8 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
-import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
@@ -13,8 +11,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import domain.Customer;
 import domain.Product;
 import service.CustomerService;
 import service.ProductServiceInterface;
@@ -29,9 +27,6 @@ public class ProductServlet extends HttpServlet {
 	
 	@Inject
 	private CustomerService cs;
-	
-	@EJB
-	private CartBean cart;
 	
 	@Inject
 	private ProductServiceInterface productbean;
@@ -94,6 +89,10 @@ public class ProductServlet extends HttpServlet {
 		
 		// TODO check present of the productcode in the table
 		
+		HttpSession session = request.getSession();
+		CartBean cart = (CartBean) session.getAttribute("cart");
+		if(cart == null) cart = new CartBean();
+		
 		String index = cart.findIndexByProductCode(productCode);
 		if(index.equals("Not Found")) {
 			cart.addProduct(productbean.findProduct(productCode), quantity);
@@ -101,6 +100,8 @@ public class ProductServlet extends HttpServlet {
 			int i = Integer.valueOf(index);
 			cart.getCartItems().get(i).setQuantity(cart.getCartItems().get(i).getQuantity() + quantity);
 		}
+		
+		session.setAttribute("cart", cart);
 
 		request.getSession().setAttribute("message", "Add to cart successfully!");
 		response.sendRedirect(request.getContextPath() + "/product");

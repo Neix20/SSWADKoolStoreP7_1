@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="domain.Product"%>
 <%@ page import="utility.CartItem"%>
+<%@ page import="session.CartBean"%>
 <%@ page import="java.util.*"%>
 <%@ page import="javax.servlet.http.HttpSession"%>
 
@@ -72,11 +73,14 @@
 <body>
 
 	<%
-		ArrayList<CartItem> cartItems = (ArrayList<CartItem>) session.getAttribute("cart");
+		CartBean cart = (CartBean) session.getAttribute("cart");
+		if (cart == null)
+			cart = new CartBean();
+		ArrayList<CartItem> cartItems = cart.getCartItems();
 		double total = (double) session.getAttribute("total");
 		double shipping = 5.0;
 		int cartCount = cartItems.size();
-		
+
 		System.out.println(total);
 	%>
 
@@ -293,8 +297,10 @@
 		out.println("</footer>");
 		*/
 	%>
-	
-	<% session.invalidate(); %>
+
+	<%
+		session.invalidate();
+	%>
 
 </body>
 </html>
