@@ -19,7 +19,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 import domain.Order;
 import domain.User;
-import formmodel.LogInModel;
+import formmodels.LogInModel;
 import service.OrderDetailServiceInterface;
 import service.OrderServiceInterface;
 import service.UserServiceInterface;
@@ -51,29 +51,23 @@ public class OrderTrackingServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String username = null;
-		
-		try {
-			Cookie[] cookies = request.getCookies();
-			if (cookies != null) {
-				for (Cookie c: cookies) {
-					if (c.getName().equals("username")) {
-						username = c.getValue();
-					}
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+			for (Cookie c: cookies) {
+				if (c.getName().equals("username")) {
+					username = c.getValue();
 				}
 			}
+		}
+		
+		try {
+			User user = userbean.getSingleUser(username);
+			List<Order> orders = orderbean.findOrderByCustId(user.getCustomer().getCustomernumber());
+			request.setAttribute("orders", orders);
+			RequestDispatcher req = request.getRequestDispatcher("order-history.jsp");
+			req.forward(request, response);
+		} catch (EJBException ex) {
 			
-			try {
-				User user = userbean.getSingleUser(username);
-				List<Order> orders = orderbean.findOrderByCustId(user.getCustomer().getCustomernumber());
-				request.setAttribute("orders", orders);
-				RequestDispatcher req = request.getRequestDispatcher("order-history.jsp");
-				req.forward(request, response);
-			} catch (EJBException ex) {
-				
-			}
-		} catch (Exception ex) {
-			request.getSession().setAttribute("message", "Please login first!");
-			response.sendRedirect(request.getContextPath() + "/login");
 		}
 	}
 

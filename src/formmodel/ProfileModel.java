@@ -1,8 +1,6 @@
 package formmodel;
 
-import java.util.Hashtable;
-
-public class ProfileModel {
+public class ProfileModel extends Model{
 	
 	private int customernumber;
 	private String addressline1;
@@ -17,9 +15,8 @@ public class ProfileModel {
 	private String postalcode;
 	private String state;
 	
-	private Hashtable<String, String> errors;
-
 	public ProfileModel() {
+		super();
 		this.addressline1 = "";
 		this.addressline2 = "";
 		this.city = "";
@@ -31,17 +28,7 @@ public class ProfileModel {
 		this.phone = "";
 		this.postalcode = "";
 		this.state = "";
-		this.errors = new Hashtable<String, String>();
-	}
-	
-	public String getErrorMessage(String attribute) {
-		String msg = errors.get(attribute.trim());
-		return (msg == null) ? "" : msg;
-	}
-
-
-	public void setErrors(String key, String msg) {
-		errors.put(key,  msg);
+		
 	}
 
 	public int getCustomernumber() {
@@ -139,14 +126,4 @@ public class ProfileModel {
 	public void setState(String state) {
 		this.state = state;
 	}
-
-	public Hashtable<String, String> getErrors() {
-		return errors;
-	}
-
-	public void setErrors(Hashtable<String, String> errors) {
-		this.errors = errors;
-	}
-
-
 }

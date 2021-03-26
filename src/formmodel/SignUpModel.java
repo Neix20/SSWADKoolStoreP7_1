@@ -2,7 +2,7 @@ package formmodel;
 
 import java.util.Hashtable;
 
-public class SignUpModel {
+public class SignUpModel extends ProfileModel{
 	
 	private String username;
 	private String password;
