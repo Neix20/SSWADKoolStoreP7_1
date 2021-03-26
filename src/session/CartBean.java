@@ -10,7 +10,11 @@ import utility.CartItem;
 @Stateful
 public class CartBean {
 	
-	private ArrayList<CartItem> cartItems = new ArrayList<CartItem>();
+	private ArrayList<CartItem> cartItems;
+	
+	public CartBean() {
+		cartItems = new ArrayList<CartItem>();
+	}
 
 	public ArrayList<CartItem> getCartItems() {
 		return cartItems;
@@ -23,6 +27,7 @@ public class CartBean {
 	public void addProduct(Product product, int quantity) {
 		CartItem ci = new CartItem(product, quantity);
 		cartItems.add(ci);
+		System.out.println(cartItems.get(0).getSubPrice());
 	}
 	
 	public void removeProduct(String productCode) {

@@ -46,7 +46,7 @@ http://www.templatemo.com/preview/templatemo_428_kool_store
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
 <body>
-    <jsp:include page="header.jsp"></jsp:include>
+    <jsp:include page="../../layout/header.jsp"></jsp:include>
 
 	<div class="content-section">
 		<div class="container">
@@ -122,7 +122,7 @@ http://www.templatemo.com/preview/templatemo_428_kool_store
 
 											});
 						</script>
-						<form action="Cart" method="GET">
+						<form action="product" method="POST">
 							<div class="container">
 								<div class="row">
 									<div class="col-lg-2">
@@ -140,7 +140,7 @@ http://www.templatemo.com/preview/templatemo_428_kool_store
 
 											<%
 												out.println(
-														"<input type = \"hidden\" name = \"productId\" value = \"" + product.getProductcode() + "\"/>");
+														"<input type = \"hidden\" name = \"productCode\" value = \"" + product.getProductcode() + "\"/>");
 											%>
 
 											<span class="input-group-btn">
@@ -311,7 +311,7 @@ http://www.templatemo.com/preview/templatemo_428_kool_store
 	</div>
 	<!-- /.content-section -->
 
-    <jsp:include page="footer.jsp"></jsp:include>
+    <jsp:include page="../../layout/footer.jsp"></jsp:include>
 
 	<script src="js/vendor/jquery-1.10.1.min.js"></script>
 	<script>

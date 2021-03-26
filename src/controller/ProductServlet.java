@@ -23,7 +23,7 @@ import session.CartBean;
 /**
  * Servlet implementation class ProductServlet
  */
-@WebServlet("/Product")
+@WebServlet("/product")
 public class ProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -57,22 +57,31 @@ public class ProductServlet extends HttpServlet {
 		try {
 			 productcode = request.getParameter("productCode");
 			 String category;
-				try {
-					Product product = productbean.findProduct(productcode);
-					category = product.getProductlineBean().getProductline();
-					List<Product> productlist = productbean.getAllProductByCategoryWithExclusion(category, product.getProductcode());
-					request.setAttribute("product", product);
-					request.setAttribute("productlist", productlist);
-					RequestDispatcher dispatcher = request.getRequestDispatcher("product-detail.jsp");
-					dispatcher.forward(request, response);
-				}
-				catch(EJBException e) {}
+			 try {
+				Product product = productbean.findProduct(productcode);
+				category = product.getProductlineBean().getProductline();
+				List<Product> productlist = productbean.getAllProductByCategoryWithExclusion(category, product.getProductcode());
+				request.setAttribute("product", product);
+				request.setAttribute("productlist", productlist);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("views/user/product/product-detail.jsp");
+				dispatcher.forward(request, response);
+			}
+			catch(EJBException e) {}
 		} catch (Exception ex) {
-			response.sendRedirect(request.getContextPath() + "/ProductList");
+			String category = request.getParameter("category");
+			if(category == null) {
+				category = "Classic Cars";
+			}
+				
+			try {
+				List<Product> products = productbean.getAllProductByCategory(category);
+				request.setAttribute("products", products);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("views/user/product/all-products.jsp");
+				dispatcher.forward(request, response);
+			}
+			catch(EJBException e) {}
 		}
-		
-		
-		
+
 	}
 
 	/**
@@ -86,7 +95,6 @@ public class ProductServlet extends HttpServlet {
 		// TODO check present of the productcode in the table
 		
 		String index = cart.findIndexByProductCode(productCode);
-		
 		if(index.equals("Not Found")) {
 			cart.addProduct(productbean.findProduct(productCode), quantity);
 		} else {
@@ -95,7 +103,7 @@ public class ProductServlet extends HttpServlet {
 		}
 
 		request.getSession().setAttribute("message", "Add to cart successfully!");
-		response.sendRedirect(request.getContextPath() + "/Product");
+		response.sendRedirect(request.getContextPath() + "/product");
 		
 	}
 

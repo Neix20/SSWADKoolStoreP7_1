@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import domain.Customer;
-import formmodels.ProfileModel;
+import formmodel.ProfileModel;
 import service.CustomerServiceInterface;
 import service.UserServiceInterface;
 
@@ -57,7 +57,7 @@ public class ProfileServlet extends HttpServlet {
 		Customer c = userBean.getSingleUser(username).getCustomer();
 		request.getSession().setAttribute("customer", c);
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("user/profile.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("views/user/profile.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -169,7 +169,7 @@ public class ProfileServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/profile");
 		} else {
 			request.getSession().setAttribute("profile", model);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("user/profile.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("views/user/profile.jsp");
 			dispatcher.forward(request, response);
 		}
 

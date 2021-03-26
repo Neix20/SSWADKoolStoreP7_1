@@ -10,6 +10,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 
+import domain.Customer;
 import domain.User;
 
 @Dependent
@@ -17,6 +18,9 @@ import domain.User;
 public class UserService implements UserServiceInterface {
 
 	private EntityManager em;
+	
+	@Inject
+	CustomerServiceInterface customerbean;
 
 	@Inject
 	public UserService(@PostGresDatabase EntityManager em) {
@@ -85,13 +89,14 @@ public class UserService implements UserServiceInterface {
 		return q.getResultList();
 	}
 	
-	public void addUser(String[] datas) throws EJBException {
+	public void addUser(String[] datas, Customer customer) throws EJBException {
 		
 		User u = new User();
 		
 		int i = 0;
 		u.setUsername(datas[i++]);
 		u.setPassword(datas[i++]);
+		u.setCustomer(customer);
 		em.persist(u);
 
 	}
@@ -101,6 +106,7 @@ public class UserService implements UserServiceInterface {
 		int i = 0;
 		User u = getSingleUser(datas[i++]);
 		u.setPassword(datas[i++]);
+		u.setCustomer(customerbean.getSingleCustomer(datas[i++]));
 		em.merge(u);
 
 	}

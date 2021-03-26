@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page import="formmodels.ProfileModel"%>
+<%@ page import="formmodel.ProfileModel"%>
 <%@ page import="domain.Customer"%>
 <!DOCTYPE html>
 <html>
@@ -33,7 +33,7 @@
 </head>
 <body>
 
-	<jsp:include page="../header.jsp"></jsp:include>
+	<jsp:include page="../layout/header.jsp"></jsp:include>
 
 	<main class="container">
 	
@@ -351,7 +351,7 @@
 	</div>
 	</main>
 
-	<jsp:include page="../footer.jsp"></jsp:include>
+	<jsp:include page="../layout/footer.jsp"></jsp:include>
 
 	<%
 		session.invalidate();

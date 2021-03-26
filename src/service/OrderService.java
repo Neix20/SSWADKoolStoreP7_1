@@ -37,7 +37,7 @@ public class OrderService implements OrderServiceInterface{
 	public Order findOrder(String id) throws EJBException {
 		// TODO Auto-generated method stub
 		Query q = em.createNamedQuery("Order.findbyId");
-		q.setParameter("id", Integer.valueOf(id));
+		q.setParameter("ordernumber", Integer.valueOf(id));
 		return (Order) q.getSingleResult();
 	}
 	
@@ -52,26 +52,9 @@ public class OrderService implements OrderServiceInterface{
 	}
 
 	@Override
-	public void updateOrder(String[] s) throws EJBException {
+	public void updateOrder(Order order) throws EJBException {
 		// TODO Auto-generated method stub
-		Date orderdate = null;
-		Date requireddate = null;
-		Date shippeddate = null;
-		Order order = findOrder(s[0]);
-		try {
-			orderdate = new SimpleDateFormat("yyyy-MM-dd").parse(s[1]);
-			requireddate = new SimpleDateFormat("yyyy-MM-dd").parse(s[2]);
-			requireddate = new SimpleDateFormat("yyyy-MM-dd").parse(s[3]);
-		} catch (Exception ex) {
-			
-		}
-			order.setOrderdate(orderdate.toString());
-			order.setRequireddate(requireddate.toString());
-			order.setShippeddate(shippeddate.toString());
-			order.setStatus(s[4]);
-			order.setComments(s[5]);
-			order.setCustomernumber(Integer.parseInt(s[6]));
-			em.persist(order);
+		em.merge(order);
 		
 	}
 
@@ -84,7 +67,7 @@ public class OrderService implements OrderServiceInterface{
 
 		Calendar c = Calendar.getInstance();
 		c.setTime(orderDate);
-		c.add(Calendar.DAY_OF_YEAR, getRandomInteger(1, 14));
+		c.add(Calendar.DAY_OF_YEAR, getRandomInteger(3, 14));
 		Date requireddate = c.getTime();
 		
 		order.setOrdernumber(ordernumber);

@@ -187,7 +187,7 @@ table tr:nth-child(2n+1) {
          <th>Required Date</th>
          <th>Shipped Date</th>
          <th>Status</th>
-         <th>Order Details</th>
+         <th>Action</th>
       </tr>
 
 	<%
@@ -199,8 +199,13 @@ table tr:nth-child(2n+1) {
 			out.println("<td>" + o.getRequireddate() + "</td>");
 			out.println("<td>" + o.getShippeddate() + "</td>");
 			out.println("<td>" + o.getStatus() + "</td>");
-			out.println("<td><a href=\"OrderDetailsServlet?ordernumber=" + o.getOrdernumber() + "\">More</a></td>");
-			out.println("</tr>");
+			out.println("<td><form action=\"OrderDetails\" method=\"POST\">"
+					+ "<input type=\"hidden\" name=\"ordernumber\" value=\"" + o.getOrdernumber() + "\"><button type=\"submit\">More</button></form>");
+			if (o.getStatus().equals("In Process")) {
+				out.println("<form action=\"OrderTracking\" method=\"POST\">"
+						+ "<input type=\"hidden\" name=\"ordernumber\" value=\"" + o.getOrdernumber() + "\"><button type=\"submit\">Cancel Order</button></form>");
+			}
+			out.println("</td></tr>");
 		}
 	} else {
     	out.println("<tr>");

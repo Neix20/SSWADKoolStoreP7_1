@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import formmodels.LogInModel;
+import formmodel.LogInModel;
 import service.UserServiceInterface;
 
 /**
@@ -49,7 +49,7 @@ public class LogInServlet extends HttpServlet {
 			
 		}
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("views/auth/login.jsp");
 		dispatcher.include(request, response);
 	}
 
@@ -80,16 +80,16 @@ public class LogInServlet extends HttpServlet {
 			Cookie cookie = new Cookie("username", username);
 			cookie.setMaxAge(60 * 60 * 24); // Hold for 24 hours
 			response.addCookie(cookie);
-			response.sendRedirect(request.getContextPath() + "/IndexServlet");
+			response.sendRedirect(request.getContextPath());
 		} else if (!userBean.isDuplicated(username)) {
 			model.setErrors("username", "Username is not found!");
 			request.getSession().setAttribute("login", model);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("views/auth/login.jsp");
 			dispatcher.include(request, response);
 		} else {
 			model.setErrors("password", "Wrong password!");
 			request.getSession().setAttribute("login", model);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("views/auth/login.jsp");
 			dispatcher.include(request, response);
 		}
 

@@ -174,18 +174,78 @@ table tr:nth-child(2n+1) {
     overflow: visible;
   }
 }
+
+/* Style The Dropdown Button */
+.dropbtn {
+  background-color: #327a81;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+  background-color: #327a81;
+}
+
 </style>
 <meta charset="ISO-8859-1">
 
 <title>Product lists</title>
 </head>
 <body>
+<div class="dropdown">
+  <button class="dropbtn">Categories</button>
+  <div class="dropdown-content">
+  
+    <a href="product?category=Classic Cars">Classic Cars</a>
+    <a href="product?category=Motorcycles">Motorcycles</a>
+    <a href="product?category=Planes">Planes</a>
+    <a href="product?category=Ships">Ships</a>
+    <a href="product?category=Trains">Trains</a>
+    <a href="product?category=Trucks and Buses">Trucks and Buses</a>
+    <a href="product?category=Vintage Cars">Vintage Cars</a>
+  </div>
+</div>
+
 <div class="table-users">
 <%
 out.println("<div class=\"header\">"+cat+"</div>");
 %>
-   
-   
    <table cellspacing="0">
       <tr>
          <th>Product Picture</th>
@@ -201,7 +261,7 @@ out.println("<div class=\"header\">"+cat+"</div>");
 	for(Product p:products){
 		out.println("<tr>");
 		out.println("<td><img src=\""+ p.getImagePath()+"\" /></td>");
-		out.println("<td><a href = \"Product?productCode="+p.getProductcode()+"\">"+p.getProductname()+"</a></td>");
+		out.println("<td><a href = \"product?productCode="+p.getProductcode()+"\">"+p.getProductname()+"</a></td>");
 		out.println("<td>"+p.getProductscale()+"</td>");
 		out.println("<td>"+p.getProductvendor()+"</td>");
 		out.println("<td>"+p.getProductdescription()+"</td>");

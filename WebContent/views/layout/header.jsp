@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ page import="javax.servlet.http.Cookie"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
+<%@ page import="javax.servlet.http.Cookie" %>
 <%
 	Cookie[] cookies = request.getCookies();
 	String username = "";
@@ -97,8 +96,8 @@
 				<!-- /.col-md-4 -->
 				<div class="col-md-8 col-sm-6 col-xs-4">
 					<div class="main-menu">
-						<a href="Cart?action=viewCart" class="toggle-menu"> <img
-							src="images/shopping_cart.png" width="50px" />
+						<a href="cart" class="toggle-menu"> <img
+							src="${ pageContext.request.contextPath }/images/shopping_cart.png" width="50px" />
 						</a>
 					</div>
 					<!-- /.main-menu -->
@@ -116,9 +115,9 @@
 				<div class="col-md-6 col-sm-7">
 					<div class="list-menu">
 						<ul>
-							<li><a href="product-list.jsp">Products</a></li>
+							<li><a href="product">Products</a></li>
 							<li><a href="OrderTracking">My Order</a></li>
-							<li><a href="contact.jsp">Contact Us</a></li>
+							<li><a href="contact">Contact Us</a></li>
 						</ul>
 					</div>
 					<!-- /.list-menu -->

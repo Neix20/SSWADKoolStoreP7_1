@@ -14,7 +14,7 @@ public interface OrderServiceInterface {
 
 	public List<Order> findOrderByCustId(int customernumber) throws EJBException;
 
-	public void updateOrder(String[] s) throws EJBException;
+	public void updateOrder(Order order) throws EJBException;
 
 	public int addOrder(String customernumber) throws EJBException;
 

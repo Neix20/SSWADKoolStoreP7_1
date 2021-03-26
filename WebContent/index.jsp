@@ -1,54 +1,51 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ page import="formmodels.LogInModel"%>
-<%@page import="java.util.*"%>
-<%@page import="domain.Product"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
+<%@ page import="formmodel.LogInModel" %>
+<%@ page import="java.util.*" %>
+<%@ page import="domain.Product" %>
 
 <!DOCTYPE html>
-<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]><html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
 <html class="no-js">
-<!--<![endif]-->
 <head>
-<%
-	List<Product> productlist = null;
-	try {
-		productlist = (List<Product>) request.getAttribute("productlist");
-		Collections.shuffle(productlist);
-	} catch (NullPointerException exx) {
-		response.sendRedirect(request.getContextPath() + "/IndexServlet");
-	}
-%>
-
-<!-- 
-Kool Store Template
-http://www.templatemo.com/preview/templatemo_428_kool_store
--->
-<meta charset="utf-8">
-<title>Kool Store - Responsive eCommerce Template</title>
-<meta name="viewport" content="width=device-width">
-
-
-<link
-	href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-	integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
-	crossorigin="anonymous">
-<link rel="stylesheet" href="${ pageContext.request.contextPath }/css/normalize.min.css">
-<link rel="stylesheet" href="${ pageContext.request.contextPath }/css/font-awesome.min.css">
-<link rel="stylesheet" href="${ pageContext.request.contextPath }/css/animate.css">
-<link rel="stylesheet" href="${ pageContext.request.contextPath }/css/templatemo-misc.css">
-<link rel="stylesheet" href="${ pageContext.request.contextPath }/css/templatemo-style.css">
-
-<script src="${ pageContext.request.contextPath }js/vendor/modernizr-2.6.2.min.js"></script>
+	<%
+		List<Product> productlist = null;
+		try {
+			productlist = (List<Product>) session.getAttribute("productlist");
+			Collections.shuffle(productlist);
+		} catch (NullPointerException exx) {
+			response.sendRedirect(request.getContextPath() + "/index");
+		}
+	%>
+	
+	<!-- 
+	Kool Store Template
+	http://www.templatemo.com/preview/templatemo_428_kool_store
+	-->
+	
+	<meta charset="utf-8">
+	<title>Kool Store - Best Car Seller</title>
+	
+	<meta name="viewport" content="width=device-width">
+	
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+	<link rel="stylesheet" href="${ pageContext.request.contextPath }/css/normalize.min.css">
+	<link rel="stylesheet" href="${ pageContext.request.contextPath }/css/font-awesome.min.css">
+	<link rel="stylesheet" href="${ pageContext.request.contextPath }/css/animate.css">
+	<link rel="stylesheet" href="${ pageContext.request.contextPath }/css/templatemo-misc.css">
+	<link rel="stylesheet" href="${ pageContext.request.contextPath }/css/templatemo-style.css">
 
 </head>
 <body>
-	<jsp:include page="header.jsp"></jsp:include>
+	
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+	<script src="${ pageContext.request.contextPath }/js/vendor/modernizr-2.6.2.min.js"></script>
+	<script src="${ pageContext.request.contextPath }/js/vendor/jquery.gmap3.min.js"></script>
+	<script src="${ pageContext.request.contextPath }/js/jquery.easing-1.3.js"></script>
+	<script src="${ pageContext.request.contextPath }/js/plugins.js"></script>
+	<script src="${ pageContext.request.contextPath }/js/main.js"></script>
+	
+	<jsp:include page="views/layout/header.jsp"></jsp:include>
 
 	<div class="content-section">
 		<div class="container">
@@ -497,21 +494,9 @@ http://www.templatemo.com/preview/templatemo_428_kool_store
 	<!--         </div> /.container -->
 	<!--     </div> /.content-section -->
 
-	<jsp:include page="footer.jsp"></jsp:include>
+	<jsp:include page="views/layout/footer.jsp"></jsp:include>
 
-
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
-		crossorigin="anonymous"></script>
-	<script src="${ pageContext.request.contextPath }/js/vendor/jquery.gmap3.min.js"></script>
-	<script src="${ pageContext.request.contextPath }/js/jquery.easing-1.3.js"></script>
-	<script src="${ pageContext.request.contextPath }/js/plugins.js"></script>
-	<script src="${ pageContext.request.contextPath }/js/main.js"></script>
-
+	<% session.invalidate(); %>
 
 </body>
 </html>

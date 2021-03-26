@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page import="formmodels.LogInModel"%>
+<%@ page import="formmodel.LogInModel"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,9 +34,24 @@
 <body>
 
 
-	<jsp:include page="header.jsp"></jsp:include>
+	<jsp:include page="../layout/header.jsp"></jsp:include>
 
 	<div class="container">
+
+		<%
+			String message = null;
+			try {
+				message = (String) session.getAttribute("message");
+
+			} catch (NullPointerException ex) {
+
+			}
+
+			if (message != null) {
+				out.println("<div class=\"alert alert-success mt-4\" role=\"alert\">" + message + "</div>");
+			}
+		%>
+
 		<div class="row">
 			<div class="col-6 offset-3">
 				<h1>Log In</h1>
@@ -105,7 +120,7 @@
 		</div>
 	</div>
 
-	<jsp:include page="footer.jsp"></jsp:include>
+	<jsp:include page="../layout/footer.jsp"></jsp:include>
 
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

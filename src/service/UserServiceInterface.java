@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.EJBException;
 
+import domain.Customer;
 import domain.User;
 
 public interface UserServiceInterface {
@@ -18,7 +19,7 @@ public interface UserServiceInterface {
 
 	public List<User> getUserList(int currentPage, int recordsPerPage, String keyword) throws EJBException;
 
-	public void addUser(String[] datas) throws EJBException;
+	public void addUser(String[] datas, Customer customer) throws EJBException;
 
 	public void updateUser(String[] datas) throws EJBException;
 

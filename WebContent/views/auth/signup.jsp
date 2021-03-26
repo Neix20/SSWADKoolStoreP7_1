@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page import="formmodels.SignUpModel"%>
+<%@ page import="formmodel.SignUpModel"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +31,7 @@
 <body>
 
 
-	<jsp:include page="header.jsp"></jsp:include>
+	<jsp:include page="../layout/header.jsp"></jsp:include>
 
 	<div class="container">
 		<div class="row">
@@ -128,7 +128,7 @@
 		</div>
 	</div>
 
-	<jsp:include page="footer.jsp"></jsp:include>
+	<jsp:include page="../layout/footer.jsp"></jsp:include>
 
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import formmodels.SignUpModel;
+import domain.Customer;
+import formmodel.SignUpModel;
 import service.UserServiceInterface;
 
 /**
@@ -39,14 +40,14 @@ public class SignUpServlet extends HttpServlet {
 		try {
 			for(Cookie cookie: cookies) {
 				if(cookie.getName().equals("username")) {
-					response.sendRedirect(request.getContextPath() + "/Profile");
+					response.sendRedirect(request.getContextPath() + "/profile");
 				}
 			}
 		}catch(NullPointerException ex) {
 			
 		}
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("signup.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("view/auth/signup.jsp");
 		dispatcher.include(request, response);
 	}
 
@@ -101,17 +102,19 @@ public class SignUpServlet extends HttpServlet {
 		
 		if(!isPassed) {
 			request.getSession().setAttribute("signup", model);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("signup.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("view/auth/signup.jsp");
 			dispatcher.include(request, response);
 		}else if(userBean.isDuplicated(username)) {
 			model.setErrors("username", "Username is not available!");
 			request.getSession().setAttribute("signup", model);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("signup.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("view/auth/signup.jsp");
 			dispatcher.include(request, response);
 		} else {
 			request.getSession().invalidate();
 			String[] datas = {username, password};
-			userBean.addUser(datas);
+			Customer customer = new Customer();
+			// TODO set customer data from form
+			userBean.addUser(datas, customer);
 			response.sendRedirect(request.getContextPath() + "/login");
 		}
 		

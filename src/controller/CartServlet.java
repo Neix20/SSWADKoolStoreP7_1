@@ -42,7 +42,7 @@ public class CartServlet extends HttpServlet {
 		request.getSession().setAttribute("cart", cart.getCartItems());
 		request.getSession().setAttribute("total", cart.getSubTotal());
 		
-		RequestDispatcher req = request.getRequestDispatcher("user/cart.jsp");
+		RequestDispatcher req = request.getRequestDispatcher("views/user/order/cart.jsp");
 		req.forward(request, response);
 		
 	}
@@ -80,7 +80,7 @@ public class CartServlet extends HttpServlet {
 		request.getSession().setAttribute("cart", cart.getCartItems());
 		request.getSession().setAttribute("total", cart.getSubTotal());
 		
-		RequestDispatcher req = request.getRequestDispatcher("user/cart.jsp");
+		RequestDispatcher req = request.getRequestDispatcher("views/user/order/cart.jsp");
 		req.forward(request, response);
 		
 	}

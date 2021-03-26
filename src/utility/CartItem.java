@@ -30,7 +30,7 @@ public class CartItem {
 	}
 	
 	public double getSubPrice() {
-		return product.getBuyprice().doubleValue() * (double) this.quantity;
+		return product.getMsrp().doubleValue() * (double) this.quantity;
 	}
 
 }

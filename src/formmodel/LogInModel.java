@@ -1,4 +1,4 @@
-package formmodels;
+package formmodel;
 
 import java.util.Hashtable;
 

@@ -18,7 +18,7 @@ import service.ProductServiceInterface;
 /**
  * Servlet implementation class IndexServlet
  */
-@WebServlet("/IndexServlet")
+@WebServlet("/index")
 public class IndexServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -37,13 +37,13 @@ public class IndexServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 		try {
 			List<Product> productlist = productbean.getAllProduct();
-			request.setAttribute("productlist", productlist);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
-			dispatcher.forward(request, response);
+			request.getSession().setAttribute("productlist", productlist);
+			response.sendRedirect(request.getContextPath());
+//			RequestDispatcher dispatcher = request.getRequestDispatcher("views/user/index.jsp");
+//			dispatcher.forward(request, response);
 		}
 		catch(EJBException e) {}
 	}
@@ -52,7 +52,7 @@ public class IndexServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		doGet(request, response);
 	}
 
